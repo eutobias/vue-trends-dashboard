@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-main-text-1: #314456;
+  --color-main-text-2: #2a3f54;
+  --color-link: #1844d8;
+  --color-stats: #1ca2cc;
+  --color-positive: #00acad;
+  --color-negative: #f91717;
+  --color-gray-1: #d7d7d7;
+  --color-gray-2: #dddddd;
+  --color-gray-3: #d9d9d9;
+  --color-gray-4: rgba(221, 221, 221, 0.8667); /* this is kind evil hahaha */
+  --color-gray-5: #968f8f;
+  --color-stats-bg-hover: #f2fcff;
+  --default-font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+}
