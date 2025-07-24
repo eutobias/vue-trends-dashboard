@@ -1,5 +1,8 @@
 <template>
   <PageWrapper>
-    <NuxtPage />
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </PageWrapper>
 </template>

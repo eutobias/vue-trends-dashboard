@@ -4,54 +4,62 @@ import DropdownMenu from './DropdownMenu.vue'
 import LinkWithIcon from './LinkWithIcon.vue'
 import Text from './Text.vue'
 import IconGoogleMaps from './icons/IconGoogleMaps.vue'
+import { useLocationsStore } from '~/stores/locations'
+import { computed } from 'vue'
 
-interface LocationDetailsProps {
-  name: string
-  address: string
-  phone: string
-  rating: number
-  totalReviews: number
-  websiteUrl: string
-  logoUrl: string
-}
+const store = useLocationsStore()
 
-defineProps<LocationDetailsProps>()
+const selectedLocationId = computed({
+  get: () => store.selectedLocation?.id ?? '',
+  set: (id: number) => store.selectLocation(id)
+})
+
+const locationOptions = computed(() => 
+  store.locations.map(location => ({
+    value: location.id,
+    label: location.name
+  }))
+)
 </script>
 
 <template>
-  <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-2">
-    <div class="flex items-start gap-6">
-      <RoundedLogo :url="logoUrl" :alt="name" />
+  <div class="flex items-start gap-5 w-full lg:w-auto">
+    <RoundedLogo
+      :url="store.selectedLocation?.location_image ?? null"
+      :alt="store.selectedLocation?.name" 
+    />
+
+    <div class="flex-1">
+      <DropdownMenu 
+        v-model="selectedLocationId"
+        :options="locationOptions"
+      />
       
-      <div class="flex-1 space-y-2">
-        <div class="flex items-start justify-between">
-          <div>
-            <Text as="h2" class="text-xl font-semibold text-main-text mb-1">{{ name }}</Text>
-            <div class="flex items-center gap-1">
-              <Text class="text-main-text-2">{{ rating }}</Text>
-              <Text class="text-main-text-2">({{ totalReviews }})</Text>
-            </div>
-          </div>
-          <DropdownMenu />
-        </div>
+      <IconStarFilled />
+<IconStarEmpty />
 
-        <div class="space-y-1">
-          <Text class="text-main-text-2">{{ address }}</Text>
-          <Text class="text-main-text-2">{{ phone }}</Text>
-        </div>
+      <div class="flex items-center gap-1">
+        <Text class="text-main-text-2 text-xs">{{ store.selectedLocation?.ave_review_rating || "---" }}</Text>
+        <Rating v-if="store.selectedLocation?.ave_review_rating" :rating="store.selectedLocation?.ave_review_rating" />
+        <Text class="text-main-text-2 text-xs">({{ store.selectedLocation?.review_count || "---" }})</Text>
+      </div>
 
-        <div class="flex items-center gap-4">
-          <LinkWithIcon
-            :url="websiteUrl"
-            label="Website"
-            :icon="IconGoogleMaps"
-          />
-          <LinkWithIcon
-            :url="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`"
-            label="View on Maps"
-            :icon="IconGoogleMaps"
-          />
-        </div>
+      <Text class="text-main-text-1 text-xs">{{ store.selectedLocation?.address || "---" }}</Text>
+      <Text class="text-main-text-1 text-xs">{{ store.selectedLocation?.primary_phone || "---" }}</Text>
+
+      <div class="flex items-center gap-4 mt-1">
+        <LinkWithIcon 
+          v-if="store.selectedLocation?.website_url" 
+          :url="store.selectedLocation.website_url" 
+          label="Website"
+          :icon="IconGoogleMaps" 
+        />
+        <LinkWithIcon 
+          v-if="store.selectedLocation?.address"
+          :url="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.selectedLocation.address)}`"
+          label="View on Maps" 
+          :icon="IconGoogleMaps" 
+        />
       </div>
     </div>
   </div>
