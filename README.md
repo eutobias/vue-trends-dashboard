@@ -1,6 +1,6 @@
 # Vue Trends Chart
 
-This is a tecnical test made with Nuxt, Vue, Pinia, TailwindCSS and ApexCharts.
+This is a technical test made with Nuxt, Vue, Pinia, TailwindCSS and ApexCharts.
 
 ## Setup
 Make sure to install dependencies:
