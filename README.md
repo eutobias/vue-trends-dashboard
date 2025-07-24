@@ -1,6 +1,5 @@
 # Vue Trends Chart
-
-This is a technical test made with Nuxt, Vue, Pinia, TailwindCSS and ApexCharts.
+This technical assessment project is built with a modern frontend stack including Nuxt (for server-side rendering and routing), Vue (as the reactive component framework), Pinia (for state management), TailwindCSS (for utility-first CSS styling), and ApexCharts (for interactive charts). The implementation focuses on performance, maintainability, and a responsive user interface.
 
 ## Setup
 Make sure to install dependencies:
