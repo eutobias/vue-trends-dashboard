@@ -1,5 +1,8 @@
 # Nuxt Minimal Starter
 
+<img width="1875" height="732" alt="image" src="https://github.com/user-attachments/assets/df20c4c7-bc59-4067-897b-5ff03e874623" />
+
+
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
